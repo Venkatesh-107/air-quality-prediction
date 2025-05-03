@@ -6,21 +6,31 @@
   <title>Air Quality Prediction</title>
   <style>
     body {
-      background-color: #f0f8ff;
+      background-color: #36681c; /* Light green background */
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0; /* Reset padding to ensure full background coverage */
+      display: flex; /* Use flexbox for centering */
+      flex-direction: column; /* Stack elements vertically */
+      align-items: center; /* Center horizontally */
+      justify-content: flex-start; /* Align from the top */
+      min-height: 100vh; /* Ensure full viewport height */
+      background-image: url('c:\Users\venka\AppData\Local\Temp\9e7f8f92-7472-4a3e-aa7e-969504b70a5f_hand-drawn-abstract-doodle-background.zip.a5f\background_flower_2_10.jpg'); /* Replace 'your_image.jpg' with your image */
+      background-size: cover; /* Cover the entire background */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Prevent image from repeating */
     }
 
     h1 {
-      color: white;
+      color: rgb(218, 121, 68);
       text-align: center;
       font-size: 36px;
       font-weight: bold;
       padding: 20px;
-      background-color: #4caf50;
+      background-color: #c69f2ad9;
       border-radius: 8px;
       margin-bottom: 30px;
+      width: 100%; /* Full width */
     }
 
     .form-container {
@@ -30,26 +40,26 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       width: 90%;
       max-width: 500px;
-      margin: auto;
+      margin-bottom: 20px; /* Add margin to separate from the message */
     }
 
     .form-container h2 {
       text-align: center;
-      color: #4caf50;
+      color: #227fc7;
       margin-bottom: 20px;
+      background-color: burlywood;
+      font-family: cursive;
     }
 
     label {
       margin-bottom: 5px;
       font-weight: bold;
-    }
-
-    label, input {
-      display: block;
-      width: 100%;
+      display: block; /* Ensure labels are on their own line */
     }
 
     input {
+      display: block;
+      width: 100%;
       padding: 8px;
       margin-bottom: 15px;
       border: 1px solid #ccc;
@@ -58,7 +68,7 @@
 
     button {
       padding: 10px 20px;
-      background-color: #4caf50;
+      background-color: #d73644;
       color: white;
       border: none;
       border-radius: 5px;
@@ -68,15 +78,15 @@
     }
 
     button:hover {
-      background-color: #45a049;
+      background-color: #ce3737;
     }
 
     #message {
-      display: none;
       text-align: center;
-      margin-top: 50px;
+      margin-top: 20px; /* Add some space above the message */
       font-size: 24px;
       color: #333;
+      display: block; /* Make sure the message is visible */
     }
 
     @media (max-width: 600px) {
@@ -96,7 +106,7 @@
   </style>
 </head>
 <body>
-  <h1>Welcome to the Air Quality Prediction</h1>
+  <h1> Air Quality Prediction</h1>
 
   <div class="form-container" id="formSection">
     <h2>Enter Data</h2>
