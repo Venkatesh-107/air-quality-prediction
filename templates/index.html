@@ -1,77 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Styled Page</title>
-    <style>
-        /* Set the background color for the entire body */
-        body {
-            background-color: #f0f8ff; /* Light blue background */
-            font-family: Arial, sans-serif; /* Change the font */
-            margin: 0;
-            padding: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Air Quality Prediction</title>
+  <style>
+    body {
+      background-color: #f0f8ff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
 
-        /* Style the heading */
-        h1 {
-            color: #333; /* Dark gray color for the text */
-            text-align: center; /* Center-align the heading */
-            font-size: 36px; /* Set the font size */
-            font-weight: bold; /* Make the font bold */
-            padding: 20px;
-            background-color: #4CAF50; /* Green background for the heading */
-            color: white; /* White text color */
-            border-radius: 8px; /* Rounded corners for the background */
-        }
+    h1 {
+      color: white;
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      padding: 20px;
+      background-color: #4caf50;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
 
-        /* Optional: Style the form */
-        .form-container {
-            background-color: white; /* White background for the form */
-            padding: 20px;
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-            width: 50%;
-            margin: auto;
-        }
+    .form-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+      margin: auto;
+    }
 
-        /* Style the form labels and inputs */
-        label, input {
-            display: block;
-            margin-bottom: 10px;
-            width: 100%;
-        }
+    .form-container h2 {
+      text-align: center;
+      color: #4caf50;
+      margin-bottom: 20px;
+    }
 
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50; /* Same green as the heading */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
 
-        button:hover {
-            background-color: #45a049; /* Darker green when hovered */
-        }
-    </style>
+    label, input {
+      display: block;
+      width: 100%;
+    }
+
+    input {
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #message {
+      display: none;
+      text-align: center;
+      margin-top: 50px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+        padding: 15px;
+      }
+
+      .form-container {
+        padding: 15px;
+      }
+
+      button {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to the Air Quality Prediction</h1>
-    <div class="form-container">
-        <h2>Enter Data</h2>
-        <form action="/predict" method="post">
-            <label for="temp">Temperature (°C):</label>
-            <input type="number" id="temp" name="temp" step="any" required>
+  <h1>Welcome to the Air Quality Prediction</h1>
 
-            <label for="humidity">Humidity (%):</label>
-            <input type="number" id="humidity" name="humidity" step="any" required>
+  <div class="form-container" id="formSection">
+    <h2>Enter Data</h2>
+    <form id="predictionForm">
+      <label for="temp">Temperature (°C):</label>
+      <input type="number" id="temp" name="temp" step="any" required />
 
-            <label for="wind_speed">Wind Speed (m/s):</label>
-            <input type="number" id="wind_speed" name="wind_speed" step="any" required>
+      <label for="humidity">Humidity (%):</label>
+      <input type="number" id="humidity" name="humidity" step="any" required />
 
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+      <label for="wind_speed">Wind Speed (m/s):</label>
+      <input type="number" id="wind_speed" name="wind_speed" step="any" required />
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div id="message"></div>
+
+  <script>
+    const form = document.getElementById('predictionForm');
+    const messageDiv = document.getElementById('message');
+    const formSection = document.getElementById('formSection');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = {
+        temp: document.getElementById('temp').value,
+        humidity: document.getElementById('humidity').value,
+        wind_speed: document.getElementById('wind_speed').value
+      };
+
+      try {
+        const response = await fetch('/predict', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        document.body.style.backgroundColor = '#d0f0c0';
+        formSection.style.display = 'none';
+
+        messageDiv.innerHTML = `✅ Prediction Result: <strong>${data.prediction}</strong>`;
+        messageDiv.style.display = 'block';
+      } catch (error) {
+        messageDiv.innerHTML = '❌ Error occurred while submitting. Please try again.';
+        messageDiv.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
