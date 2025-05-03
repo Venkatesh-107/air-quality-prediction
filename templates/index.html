@@ -1,166 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Air Quality Prediction</title>
-  <style>
-    body {
-      background-color: #7fa57f; /* Light green background */
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0; /* Reset padding to ensure full background coverage */
-      display: flex; /* Use flexbox for centering */
-      flex-direction: column; /* Stack elements vertically */
-      align-items: center; /* Center horizontally */
-      justify-content: flex-start; /* Align from the top */
-      min-height: 100vh; /* Ensure full viewport height */
-      background-image: url('/static/background_flower_2_10.jpg'); /* Replace 'your_image.jpg' with your image */
-      background-size: cover; /* Cover the entire background */
-      background-position: center; /* Center the image */
-      background-repeat: no-repeat; /* Prevent image from repeating */
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Air Quality Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://i.postimg.cc/XXMFb6hY/anime-style-clouds.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            color: #333; /* Dark gray text for general readability */
+        }
 
-    h1 {
-      color: rgb(218, 121, 68);
-      text-align: center;
-      font-size: 36px;
-      font-weight: bold;
-      padding: 20px;
-      background-color: #e1dcd0d9;
-      border-radius: 8px;
-      margin-bottom: 30px;
-      width: 100%; /* Full width */
-    }
+        h1 {
+            color: #fff; /* White title text */
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* Slightly darker, semi-transparent background */
+            border-radius: 8px;
+            margin-bottom: 30px;
+            width: 80%;
+            max-width: 600px;
+        }
 
-    .form-container {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 500px;
-      margin-bottom: 20px; /* Add margin to separate from the message */
-    }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9); /* White, slightly transparent form background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .form-container h2 {
-      text-align: center;
-      color: #227fc7;
-      margin-bottom: 20px;
-      background-color: burlywood;
-      font-family: cursive;
-    }
+        .form-container h2 {
+            color: #fff; /* White heading text */
+            background-color: rgba(100, 149, 237, 0.7); /* Cornflower blue, semi-transparent */
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
 
-    label {
-      margin-bottom: 5px;
-      font-weight: bold;
-      display: block; /* Ensure labels are on their own line */
-    }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555; /* Slightly darker label text */
+            font-weight: bold;
+        }
 
-    input {
-      display: block;
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd; /* Light gray border */
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
-    button {
-      padding: 10px 20px;
-      background-color: #d73644;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 16px;
-    }
+        button {
+            background-color: rgba(255, 165, 0, 0.8); /* Orange button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
 
-    button:hover {
-      background-color: #ce3737;
-    }
+        button:hover {
+            background-color: rgba(255, 140, 0, 0.8); /* Darker orange on hover */
+        }
 
-    #message {
-      text-align: center;
-      margin-top: 20px; /* Add some space above the message */
-      font-size: 24px;
-      color: #333;
-      display: block; /* Make sure the message is visible */
-    }
+        #message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            color: white;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            display: none;
+        }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 28px;
-        padding: 15px;
-      }
-
-      .form-container {
-        padding: 15px;
-      }
-
-      button {
-        font-size: 14px;
-      }
-    }
-  </style>
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <h1> Air Quality Prediction</h1>
+    <h1>Air Quality Prediction</h1>
 
-  <div class="form-container" id="formSection">
-    <h2>Enter Data</h2>
-    <form id="predictionForm">
-      <label for="temp">Temperature (°C):</label>
-      <input type="number" id="temp" name="temp" step="any" required />
+    <div class="form-container" id="formSection">
+        <h2>Enter Data</h2>
+        <form id="predictionForm">
+            <label for="temp">Temperature (°C):</label>
+            <input type="number" id="temp" name="temp" step="any" required />
 
-      <label for="humidity">Humidity (%):</label>
-      <input type="number" id="humidity" name="humidity" step="any" required />
+            <label for="humidity">Humidity (%):</label>
+            <input type="number" id="humidity" name="humidity" step="any" required />
 
-      <label for="wind_speed">Wind Speed (m/s):</label>
-      <input type="number" id="wind_speed" name="wind_speed" step="any" required />
+            <label for="wind_speed">Wind Speed (m/s):</label>
+            <input type="number" id="wind_speed" name="wind_speed" step="any" required />
 
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
-  <div id="message"></div>
+    <div id="message"></div>
 
-  <script>
-    const form = document.getElementById('predictionForm');
-    const messageDiv = document.getElementById('message');
-    const formSection = document.getElementById('formSection');
+    <script>
+        const form = document.getElementById('predictionForm');
+        const messageDiv = document.getElementById('message');
+        const formSection = document.getElementById('formSection');
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-      const formData = {
-        temp: document.getElementById('temp').value,
-        humidity: document.getElementById('humidity').value,
-        wind_speed: document.getElementById('wind_speed').value
-      };
+            const formData = {
+                temp: document.getElementById('temp').value,
+                humidity: document.getElementById('humidity').value,
+                wind_speed: document.getElementById('wind_speed').value
+            };
 
-      try {
-        const response = await fetch('/predict', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                document.body.style.backgroundColor = '#d0f0c0';
+                formSection.style.display = 'none';
+
+                messageDiv.innerHTML = `✅ Prediction Result: <strong>${data.prediction}</strong>`;
+                messageDiv.style.display = 'block';
+            } catch (error) {
+                messageDiv.innerHTML = '❌ Error occurred while submitting. Please try again.';
+                messageDiv.style.display = 'block';
+            }
         });
-
-        const data = await response.json();
-
-        document.body.style.backgroundColor = '#d0f0c0';
-        formSection.style.display = 'none';
-
-        messageDiv.innerHTML = `✅ Prediction Result: <strong>${data.prediction}</strong>`;
-        messageDiv.style.display = 'block';
-      } catch (error) {
-        messageDiv.innerHTML = '❌ Error occurred while submitting. Please try again.';
-        messageDiv.style.display = 'block';
-      }
-    });
-  </script>
+    </script>
 </body>
+
 </html>
