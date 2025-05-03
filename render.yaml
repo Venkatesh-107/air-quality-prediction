@@ -1,0 +1,22 @@
+# render.yaml
+services:
+  - type: web
+    name: air-quality-prediction
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    branch: main
+    envVars:
+      - key: FLASK_APP
+        value: app.py
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        value: "your_secret_key"
+    autoDeploy: true
+
+  # Optionally, add other services like a database or worker here.
+  # - type: database
+  #   name: my-database
+  #   plan: free

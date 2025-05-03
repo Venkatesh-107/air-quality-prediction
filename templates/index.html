@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Page</title>
+    <style>
+        /* Set the background color for the entire body */
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+            font-family: Arial, sans-serif; /* Change the font */
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Style the heading */
+        h1 {
+            color: #333; /* Dark gray color for the text */
+            text-align: center; /* Center-align the heading */
+            font-size: 36px; /* Set the font size */
+            font-weight: bold; /* Make the font bold */
+            padding: 20px;
+            background-color: #4CAF50; /* Green background for the heading */
+            color: white; /* White text color */
+            border-radius: 8px; /* Rounded corners for the background */
+        }
+
+        /* Optional: Style the form */
+        .form-container {
+            background-color: white; /* White background for the form */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            width: 50%;
+            margin: auto;
+        }
+
+        /* Style the form labels and inputs */
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Same green as the heading */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green when hovered */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Air Quality Prediction</h1>
+    <div class="form-container">
+        <h2>Enter Data</h2>
+        <form action="/predict" method="post">
+            <label for="temp">Temperature (°C):</label>
+            <input type="number" id="temp" name="temp" step="any" required>
+
+            <label for="humidity">Humidity (%):</label>
+            <input type="number" id="humidity" name="humidity" step="any" required>
+
+            <label for="wind_speed">Wind Speed (m/s):</label>
+            <input type="number" id="wind_speed" name="wind_speed" step="any" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
