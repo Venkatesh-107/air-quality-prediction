@@ -160,46 +160,61 @@
     </div>
 
     <script>
-        const form = document.getElementById('predictionForm');
-        const messageDiv = document.getElementById('message');
-        const formSection = document.getElementById('formSection');
-        const predictionSection = document.getElementById('predictionSection');
-        const resultDiv = document.getElementById('result');
+    const form = document.getElementById('predictionForm');
+    const messageDiv = document.getElementById('message');
+    const formSection = document.getElementById('formSection');
+    const predictionSection = document.getElementById('predictionSection');
+    const resultDiv = document.getElementById('result');
+    const body = document.body;
 
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
+    function getFeedback(pm25) {
+        if (pm25 <= 50) return "🟢 Good air quality";
+        else if (pm25 <= 100) return "🟡 Moderate air quality";
+        else if (pm25 <= 150) return "🟠 Unhealthy for sensitive groups";
+        else if (pm25 <= 200) return "🔴 Unhealthy";
+        else if (pm25 <= 300) return "🟣 Very Unhealthy";
+        else return "🔴 Hazardous";
+    }
 
-            const formData = {
-                temp: document.getElementById('temp').value,
-                humidity: document.getElementById('humidity').value,
-                wind_speed: document.getElementById('wind_speed').value
-            };
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-            try {
-                const response = await fetch('/predict', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
+        const formData = {
+            temp: document.getElementById('temp').value,
+            humidity: document.getElementById('humidity').value,
+            wind_speed: document.getElementById('wind_speed').value
+        };
 
-                const data = await response.json();
+        try {
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
 
-                // If prediction is successful, hide the form and show the result
-                if (response.ok) {
-                    formSection.style.display = 'none';
-                    predictionSection.style.display = 'block';
+            const data = await response.json();
 
-                    resultDiv.innerHTML = `${data.prediction} µg/m³`;
-                } else {
-                    throw new Error(data.error || 'An unknown error occurred');
-                }
-            } catch (error) {
-                messageDiv.innerHTML = `❌ Error: ${error.message}`;
-                messageDiv.style.display = 'block';
+            if (response.ok) {
+                formSection.style.display = 'none';
+                predictionSection.style.display = 'block';
+
+                const pm25 = parseFloat(data.prediction).toFixed(2);
+                const feedback = getFeedback(pm25);
+
+                resultDiv.innerHTML = `${pm25} µg/m³<br><small>${feedback}</small>`;
+
+                // Change background for result page
+                body.style.backgroundImage = "url('https://i.postimg.cc/3N8yMZGc/mountain-sunset.jpg')";
+            } else {
+                throw new Error(data.error || 'An unknown error occurred');
             }
-        });
+        } catch (error) {
+            messageDiv.innerHTML = `❌ Error: ${error.message}`;
+            messageDiv.style.display = 'block';
+        }
+    });
     </script>
 </body>
 
