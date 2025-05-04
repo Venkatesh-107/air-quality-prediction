@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from predictor import predict_pm25
 
 app = Flask(__name__)
@@ -9,14 +9,29 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    data = request.form
-    input_data = {
-        "temp": float(data["temp"]),
-        "humidity": float(data["humidity"]),
-        "wind_speed": float(data["wind_speed"])
-    }
-    prediction = predict_pm25(input_data)
-    return f"<h2>Predicted PM2.5: {prediction:.2f}</h2>"
+    try:
+        # Parse the incoming JSON data
+        data = request.get_json()
+        
+        # Ensure the data contains required keys
+        if not data or 'temp' not in data or 'humidity' not in data or 'wind_speed' not in data:
+            return jsonify({"error": "Missing required data (temp, humidity, wind_speed)"}), 400
+
+        input_data = {
+            "temp": float(data["temp"]),
+            "humidity": float(data["humidity"]),
+            "wind_speed": float(data["wind_speed"])
+        }
+
+        # Make the prediction using the predictor
+        prediction = predict_pm25(input_data)
+
+        # Return the prediction in JSON format
+        return jsonify({"prediction": round(prediction, 2)})
+
+    except Exception as e:
+        print(f"Error: {e}")  # Log the error on the server console
+        return jsonify({"error": "An error occurred during prediction. Please try again later."}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)

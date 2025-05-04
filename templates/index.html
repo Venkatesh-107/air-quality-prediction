@@ -149,7 +149,15 @@
                     body: JSON.stringify(formData)
                 });
 
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
                 const data = await response.json();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
 
                 document.body.style.backgroundColor = '#d0f0c0';
                 formSection.style.display = 'none';
@@ -157,7 +165,7 @@
                 messageDiv.innerHTML = `✅ Prediction Result: <strong>${data.prediction}</strong>`;
                 messageDiv.style.display = 'block';
             } catch (error) {
-                messageDiv.innerHTML = '❌ Error occurred while submitting. Please try again.';
+                messageDiv.innerHTML = `❌ Error: ${error.message}`;
                 messageDiv.style.display = 'block';
             }
         });
