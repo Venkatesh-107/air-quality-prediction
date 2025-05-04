@@ -10,4 +10,4 @@ python-dotenv==1.0.0
 plotly==5.9.0
 lxml==4.9.3
 tensorflow==2.19.0
-Werkzeug==2.0.3
+Werkzeug==2.2.2
