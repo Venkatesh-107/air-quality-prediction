@@ -1,14 +1,92 @@
-Flask==2.2.2
-Flask-Cors==5.0.1
-scikit-learn==1.2.2
-pandas==2.0.1
-numpy==1.23.0
-matplotlib==3.7.1
-requests==2.28.2
+# Core Web Frameworks
+flask==2.2.2
+streamlit==1.24.1
 gunicorn==20.1.0
-python-dotenv==1.0.0
+
+# ML/DL
+scikit-learn==1.2.2
+tensorflow==2.11.0
+xgboost==1.7.6
+lightgbm==4.1.0
+joblib==1.2.0
+keras==2.11.0
+
+# Data Handling
+numpy==1.23.5
+pandas==1.5.3
+scipy==1.10.1
+statsmodels==0.13.5
+pytz==2023.3
+
+# Plotting & Visualization
+matplotlib==3.7.1
+seaborn==0.12.2
 plotly==5.9.0
+altair==5.0.0
+bokeh==3.2.1
+
+# Feature Engineering & Preprocessing
+category_encoders==2.6.0
+imbalanced-learn==0.10.1
+sklearn-pandas==2.2.0
+
+# Hyperparameter Tuning & Experiment Tracking
+optuna==3.1.0
+mlflow==2.2.2
+
+# Utilities
+python-dotenv==1.0.0
+pyyaml==6.0
+tqdm==4.65.0
+requests==2.28.2
+json5==0.9.14
+
+# Date & Time Handling
+datetime==5.2
+pendulum==2.1.2
+
+# File & Model I/O
+openpyxl==3.1.2
+h5py==3.8.0
+joblib==1.2.0
+cloudpickle==2.2.1
+
+# API & HTTP
+flask-cors==3.0.10
+httpx==0.24.1
+urllib3==1.26.15
+
+# Linting, Formatting, Debugging
+black==23.3.0
+flake8==6.0.0
+debugpy==1.6.7
+
+# Logging
+loguru==0.7.0
+
+# Web Deployment
+Werkzeug==2.2.3
+Jinja2==3.1.2
+MarkupSafe==2.1.2
+
+# Serialization
+pickle5==0.0.11
+msgpack==1.0.5
+
+# Parsing & Data Wrangling
 lxml==4.9.3
-tensorflow==2.19.0
-Werkzeug==2.2.2
-joblib
+beautifulsoup4==4.12.2
+html5lib==1.1
+
+# Image Processing (optional for AQI heatmaps, etc.)
+Pillow==9.5.0
+opencv-python==4.7.0.72
+
+# Geospatial (optional for AQ maps)
+geopandas==0.12.2
+folium==0.14.0
+
+# Dev & Jupyter
+ipython==8.13.2
+jupyterlab==3.6.3
+notebook==6.5.4
