@@ -1,22 +1,13 @@
-# render.yaml
-services:
-  - type: web
-    name: air-quality-prediction
-    env: python
-    plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python app.py"
-    branch: main
-    envVars:
-      - key: FLASK_APP
-        value: app.py
-      - key: FLASK_ENV
-        value: production
-      - key: SECRET_KEY
-        value: "your_secret_key"
-    autoDeploy: true
-
-  # Optionally, add other services like a database or worker here.
-  # - type: database
-  #   name: my-database
-  #   plan: free
+Flask==2.1.1
+requests==2.26.0
+pandas==1.4.2
+numpy==1.23.1
+scikit-learn==0.24.2
+tensorflow==2.11.0
+pillow==9.2.0
+matplotlib==3.5.1
+flask-cors==3.1.1
+gunicorn==20.1.0
+psycopg2==2.9.3  # If you're using PostgreSQL as the database
+flask_sqlalchemy==2.5.1  # If you're using SQLAlchemy for database
+python-dotenv==0.19.2  # For managing environment variables in .env file
