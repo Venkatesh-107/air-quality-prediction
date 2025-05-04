@@ -19,16 +19,16 @@
             align-items: center;
             justify-content: flex-start;
             min-height: 100vh;
-            color: #333; /* Dark gray text for general readability */
+            color: #333;
         }
 
         h1 {
-            color: #fff; /* White title text */
+            color: #fff;
             text-align: center;
             font-size: 36px;
             font-weight: bold;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.6); /* Slightly darker, semi-transparent background */
+            background-color: rgba(0, 0, 0, 0.6);
             border-radius: 8px;
             margin-bottom: 30px;
             width: 80%;
@@ -36,7 +36,7 @@
         }
 
         .form-container {
-            background-color: rgba(255, 255, 255, 0.9); /* White, slightly transparent form background */
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -47,8 +47,8 @@
         }
 
         .form-container h2 {
-            color: #fff; /* White heading text */
-            background-color: rgba(100, 149, 237, 0.7); /* Cornflower blue, semi-transparent */
+            color: #fff;
+            background-color: rgba(100, 149, 237, 0.7);
             padding: 10px;
             margin-bottom: 20px;
             border-radius: 5px;
@@ -57,7 +57,7 @@
         label {
             display: block;
             margin-bottom: 5px;
-            color: #555; /* Slightly darker label text */
+            color: #555;
             font-weight: bold;
         }
 
@@ -65,13 +65,13 @@
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
-            border: 1px solid #ddd; /* Light gray border */
+            border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
         }
 
         button {
-            background-color: rgba(255, 165, 0, 0.8); /* Orange button */
+            background-color: rgba(255, 165, 0, 0.8);
             color: white;
             padding: 10px 20px;
             border: none;
@@ -83,7 +83,7 @@
         }
 
         button:hover {
-            background-color: rgba(255, 140, 0, 0.8); /* Darker orange on hover */
+            background-color: rgba(255, 140, 0, 0.8);
         }
 
         #message {
@@ -91,10 +91,36 @@
             margin-top: 20px;
             font-size: 24px;
             color: white;
-            padding: 10px;
+            padding: 20px;
             background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 5px;
+            border-radius: 10px;
             display: none;
+        }
+
+        .prediction-container {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .prediction-container h2 {
+            color: #fff;
+            background-color: rgba(34, 139, 34, 0.7); /* Green background for success */
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .prediction-result {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2e8b57; /* Green color for positive result */
+            margin-top: 10px;
         }
 
         @media (max-width: 600px) {
@@ -126,12 +152,21 @@
 
     <div id="message"></div>
 
+    <div id="predictionSection" style="display: none;">
+        <div class="prediction-container">
+            <h2>Prediction Result</h2>
+            <div id="result" class="prediction-result"></div>
+        </div>
+    </div>
+
     <script>
         const form = document.getElementById('predictionForm');
         const messageDiv = document.getElementById('message');
         const formSection = document.getElementById('formSection');
+        const predictionSection = document.getElementById('predictionSection');
+        const resultDiv = document.getElementById('result');
 
-        form.addEventListener('submit', async function(e) {
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const formData = {
@@ -149,21 +184,17 @@
                     body: JSON.stringify(formData)
                 });
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
                 const data = await response.json();
 
-                if (data.error) {
-                    throw new Error(data.error);
+                // If prediction is successful, hide the form and show the result
+                if (response.ok) {
+                    formSection.style.display = 'none';
+                    predictionSection.style.display = 'block';
+
+                    resultDiv.innerHTML = `${data.prediction} µg/m³`;
+                } else {
+                    throw new Error(data.error || 'An unknown error occurred');
                 }
-
-                document.body.style.backgroundColor = '#d0f0c0';
-                formSection.style.display = 'none';
-
-                messageDiv.innerHTML = `✅ Prediction Result: <strong>${data.prediction}</strong>`;
-                messageDiv.style.display = 'block';
             } catch (error) {
                 messageDiv.innerHTML = `❌ Error: ${error.message}`;
                 messageDiv.style.display = 'block';
