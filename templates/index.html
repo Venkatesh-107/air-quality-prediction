@@ -2,164 +2,178 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Air Quality Prediction</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-image: url('https://i.postimg.cc/XXMFb6hY/anime-style-clouds.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            color: #333;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Air Quality Prediction</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-image: url('https://i.postimg.cc/s2wFvMC1/Pngtree-colorful-rich-blue-orange-yellow-1330358.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #f0f0f0; /* light text for readability */
+    }
 
-        h1 {
-            color: #fff;
-            text-align: center;
-            font-size: 36px;
-            font-weight: bold;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 8px;
-            margin-bottom: 30px;
-            width: 80%;
-            max-width: 600px;
-        }
+    h1 {
+      color: #fff;
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      margin-bottom: 30px;
+      width: 80%;
+      max-width: 600px;
+      animation: fadeInSlide 1.2s ease-out forwards;
+    }
 
-        .form-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    /* Add fade animation */
+    @keyframes fadeInSlide {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
 
-        .form-container h2 {
-            color: #fff;
-            background-color: rgba(100, 149, 237, 0.7);
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: bold;
-        }
+    .form-container,
+    .prediction-container {
+      background-color: rgba(0, 0, 0, 0.6); /* darker, semi-transparent for contrast */
+      color: #f8f8f8;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+    .form-container h2,
+    .prediction-container h2 {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
 
-        button {
-            background-color: rgba(255, 165, 0, 0.8);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #ddd;
+      font-weight: bold;
+    }
 
-        button:hover {
-            background-color: rgba(255, 140, 0, 0.8);
-        }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #111;
+      transition: all 0.3s ease;
+    }
 
-        #message {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 24px;
-            color: white;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            display: none;
-        }
+    input:focus {
+      border-color: #00ffaa;
+      box-shadow: 0 0 10px rgba(0, 255, 170, 0.7);
+    }
 
-        .prediction-container {
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    button {
+      background-color: rgba(0, 123, 255, 0.85);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
 
-        .prediction-container h2 {
-            color: #fff;
-            background-color: rgba(34, 139, 34, 0.7); /* Green background for success */
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
+    button:hover {
+      background-color: rgba(0, 100, 210, 0.85);
+      transform: translateY(-2px);
+    }
 
-        .prediction-result {
-            font-size: 36px;
-            font-weight: bold;
-            color: #2e8b57; /* Green color for positive result */
-            margin-top: 10px;
-        }
+    #message {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 24px;
+      color: white;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      display: none;
+    }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 28px;
-            }
-        }
-    </style>
+    .prediction-result {
+      font-size: 36px;
+      font-weight: bold;
+      color: #00ffaa; /* bright cyan-green for visibility */
+      margin-top: 10px;
+    }
+
+    .prediction-result small {
+      display: block;
+      font-size: 18px;
+      color: #eee;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <h1>Air Quality Prediction</h1>
+  <h1>Air Quality Prediction</h1>
 
-    <div class="form-container" id="formSection">
-        <h2>Enter Data</h2>
-        <form id="predictionForm">
-            <label for="temp">Temperature (°C):</label>
-            <input type="number" id="temp" name="temp" step="any" required />
+  <div class="form-container" id="formSection">
+    <h2>Enter Data</h2>
+    <form id="predictionForm">
+      <label for="temp">Temperature (°C):</label>
+      <input type="number" id="temp" name="temp" step="any" required />
 
-            <label for="humidity">Humidity (%):</label>
-            <input type="number" id="humidity" name="humidity" step="any" required />
+      <label for="humidity">Humidity (%):</label>
+      <input type="number" id="humidity" name="humidity" step="any" required />
 
-            <label for="wind_speed">Wind Speed (m/s):</label>
-            <input type="number" id="wind_speed" name="wind_speed" step="any" required />
+      <label for="wind_speed">Wind Speed (m/s):</label>
+      <input type="number" id="wind_speed" name="wind_speed" step="any" required />
 
-            <button type="submit">Submit</button>
-        </form>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div id="message"></div>
+
+  <div id="predictionSection" style="display: none;">
+    <div class="prediction-container">
+      <h2>Prediction Result</h2>
+      <div id="result" class="prediction-result"></div>
     </div>
+  </div>
 
-    <div id="message"></div>
-
-    <div id="predictionSection" style="display: none;">
-        <div class="prediction-container">
-            <h2>Prediction Result</h2>
-            <div id="result" class="prediction-result"></div>
-        </div>
-    </div>
-
-    <script>
+  <script>
     const form = document.getElementById('predictionForm');
     const messageDiv = document.getElementById('message');
     const formSection = document.getElementById('formSection');
@@ -168,54 +182,54 @@
     const body = document.body;
 
     function getFeedback(pm25) {
-        if (pm25 <= 50) return "🟢 Good air quality";
-        else if (pm25 <= 100) return "🟡 Moderate air quality";
-        else if (pm25 <= 150) return "🟠 Unhealthy for sensitive groups";
-        else if (pm25 <= 200) return "🔴 Unhealthy";
-        else if (pm25 <= 300) return "🟣 Very Unhealthy";
-        else return "🔴 Hazardous";
+      if (pm25 <= 50) return "🟢 Good air quality";
+      else if (pm25 <= 100) return "🟡 Moderate air quality";
+      else if (pm25 <= 150) return "🟠 Unhealthy for sensitive groups";
+      else if (pm25 <= 200) return "🔴 Unhealthy";
+      else if (pm25 <= 300) return "🟣 Very Unhealthy";
+      else return "🔴 Hazardous";
     }
 
     form.addEventListener('submit', async function (e) {
-        e.preventDefault();
+      e.preventDefault();
 
-        const formData = {
-            temp: document.getElementById('temp').value,
-            humidity: document.getElementById('humidity').value,
-            wind_speed: document.getElementById('wind_speed').value
-        };
+      const formData = {
+        temp: document.getElementById('temp').value,
+        humidity: document.getElementById('humidity').value,
+        wind_speed: document.getElementById('wind_speed').value
+      };
 
-        try {
-            const response = await fetch('/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
+      try {
+        const response = await fetch('/predict', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
 
-            const data = await response.json();
+        const data = await response.json();
 
-            if (response.ok) {
-                formSection.style.display = 'none';
-                predictionSection.style.display = 'block';
+        if (response.ok) {
+          formSection.style.display = 'none';
+          predictionSection.style.display = 'block';
 
-                const pm25 = parseFloat(data.prediction).toFixed(2);
-                const feedback = getFeedback(pm25);
+          const pm25 = parseFloat(data.prediction).toFixed(2);
+          const feedback = getFeedback(pm25);
 
-                resultDiv.innerHTML = `${pm25} µg/m³<br><small>${feedback}</small>`;
+          resultDiv.innerHTML = `${pm25} µg/m³<br><small>${feedback}</small>`;
 
-                // Change background for result page
-                body.style.backgroundImage = "url('https://i.postimg.cc/3N8yMZGc/mountain-sunset.jpg')";
-            } else {
-                throw new Error(data.error || 'An unknown error occurred');
-            }
-        } catch (error) {
-            messageDiv.innerHTML = `❌ Error: ${error.message}`;
-            messageDiv.style.display = 'block';
+          // ✅ Change background for result page
+          body.style.backgroundImage = "url('https://i.postimg.cc/htVQWBW2/Pngtree-stereoscopic-projection-stock-market-chart-317284.jpg')";
+        } else {
+          throw new Error(data.error || 'An unknown error occurred');
         }
+      } catch (error) {
+        messageDiv.innerHTML = `❌ Error: ${error.message}`;
+        messageDiv.style.display = 'block';
+      }
     });
-    </script>
+  </script>
 </body>
 
 </html>
