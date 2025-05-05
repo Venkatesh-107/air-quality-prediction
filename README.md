@@ -2,6 +2,11 @@
 
 This project predicts air quality using various machine learning algorithms based on environmental and weather data. It aims to provide insights into air pollution levels and help with forecasting future air quality conditions.
 
+---
+## 🚀 Live Demo
+🔗 [Click here to try the app on Render Cloud](https://air-quality-prediction-ug8x.onrender.com)
+---
+
 ## 🚀 Features
 
 - Predicts Air Quality Index (AQI) using ML models
@@ -100,7 +105,3 @@ Pull requests are welcome! For major changes, please open an issue first.
 
 ```
 
----
-
-Let me know if you'd like help creating a `main.py` file that runs end-to-end preprocessing, training, and prediction.
-```
